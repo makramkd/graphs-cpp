@@ -1,8 +1,9 @@
 #include <iostream>
-
-using namespace std;
+#include "edge.h"
 
 int main() {
-    cout << "Hello, World!" << endl;
-    return 0;
+    edge<std::string, std::string> e;
+    e.v1 = "hello";
+    e.v2 = "world";
+    e.weight = "hahaha";
 }
