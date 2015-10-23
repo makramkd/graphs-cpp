@@ -11,10 +11,9 @@
  * undirected graph. The edge could have a weight: if
  * it doesn't, it's weight would be 0.
  */
+template<typename size_type = unsigned int,
+        typename id_type = int>
 struct edge {
-    typedef unsigned int size_type;
-    typedef int id_type;
-
     id_type v1;
     id_type v2;
     size_type weight;
