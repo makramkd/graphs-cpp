@@ -192,10 +192,14 @@ public:
         auto index_v2 = vertex_map[edge.v2];
 
         // remove the edge from both adjacency lists
-        auto loc_v1 = adj_list[index_v1];
-        loc_v1.erase(std::remove(loc_v1.begin(), loc_v1.end(), edge.v2));
-        auto loc_v2 = adj_list[index_v2];
-        loc_v2.erase(std::remove(loc_v2.begin(), loc_v2.end(), edge.v1));
+        auto& loc_v1 = adj_list[index_v1];
+        loc_v1.erase(std::remove_if(loc_v1.begin(), loc_v1.end(), [&edge](const adjacent_vertex& vertex) {
+            return vertex.vertex == edge.v2;
+        }));
+        auto& loc_v2 = adj_list[index_v2];
+        loc_v2.erase(std::remove_if(loc_v2.begin(), loc_v2.end(), [&edge](const adjacent_vertex& vertex) {
+            return vertex.vertex == edge.v1;
+        }));
 
         --num_edges;
     }
