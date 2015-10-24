@@ -142,6 +142,8 @@ public:
         // add the vertices to their respective adjacency lists
         adj_list[index_v1].push_back({edge.v2, edge.weight});
         adj_list[index_v2].push_back({edge.v1, edge.weight});
+
+        ++num_edges;
     }
 
     /**
@@ -172,7 +174,22 @@ public:
      */
     void remove_edge(const edge<vertex_type, weight_type>& edge)
     {
+        auto find_v1 = vertex_map.find(edge.v1);
+        auto find_v2 = vertex_map.find(edge.v2);
+        if (find_v1 == vertex_map.end() || find_v2 == vertex_map.end()) {
+            return; // edge is not in the graph
+        }
 
+        auto index_v1 = vertex_map[edge.v1];
+        auto index_v2 = vertex_map[edge.v2];
+
+        // remove the edge from both adjacency lists
+        auto loc_v1 = adj_list[index_v1];
+        loc_v1.erase(std::remove(loc_v1.begin(), loc_v1.end(), edge.v2));
+        auto loc_v2 = adj_list[index_v2];
+        loc_v2.erase(std::remove(loc_v2.begin(), loc_v2.end(), edge.v1));
+
+        --num_edges;
     }
 
     /**
@@ -181,7 +198,7 @@ public:
      */
     void remove_edge(vertex_type v1, vertex_type v2)
     {
-
+        remove_edge(edge<vertex_type, weight_type>(v1, v2));
     }
 
     /**
@@ -229,6 +246,16 @@ public:
                     });
         return min == adj_list.end() ? -1 : *min;
     }
+
+    size_type edge_count() const
+    {
+        return num_edges;
+    }
+
+    size_type vertex_count() const
+    {
+        return adj_list.size();
+    }
 private:
     // the adjacency list itself.
     std::vector<vertex_list> adj_list;
@@ -241,6 +268,10 @@ private:
     // this will hold the integer key of the next vertex that will be inserted.
     // we will start from 0 and increment it by 1 each time a vertex is added.
     size_type next_vertex;
+
+    // store the number of edges because there's no super
+    // easy and cheap way to calculate it
+    size_type num_edges;
 };
 
 
