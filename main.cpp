@@ -4,7 +4,7 @@
 int main() {
     std::cout << "Graph test" << std::endl;
 
-    graph<> g;
+    graph<int, int> g;
 
     // add some vertices to g
     for (int i = 0; i < 5; ++i) {
@@ -46,4 +46,10 @@ int main() {
         std::cout << v.vertex << " ";
     }
     std::cout << ")";
+
+    // try to remove a vertex
+    g.remove_vertex(1);
+
+    std::cout << "Number of vertices in g: " << g.vertices() << std::endl;
+    std::cout << "Number of edges in g: " << g.edges() << std::endl;
 }
