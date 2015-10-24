@@ -52,10 +52,13 @@ public:
      */
     adjacency_list(size_type vertex_count)
     :adj_list(vertex_count),
-     next_vertex(vertex_count + 1),
+     next_vertex(vertex_count),
      vertex_map()
     {
-
+        // fill up the map
+        for (unsigned long i = 0; i < vertex_count; ++i) {
+            vertex_map[i] = i;
+        }
     }
 
     /**
@@ -248,11 +251,17 @@ public:
         return min == adj_list.end() ? 0 : min->size();
     }
 
+    /**
+     * Get the number of edges in this graph.
+     */
     size_type edge_count() const
     {
         return num_edges;
     }
 
+    /**
+     * Get the number of vertices in this graph.
+     */
     size_type vertex_count() const
     {
         return adj_list.size();
