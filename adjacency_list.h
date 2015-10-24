@@ -126,17 +126,26 @@ public:
             if (idx == index) {
                 continue; // don't do anything to this index: will remove later
             } else {
-                auto v_list = adj_list[idx];
-                v_list.erase(std::remove_if(v_list.begin(), v_list.end(), [&vertex](const adjacent_vertex& v1) {
+                auto& v_list = adj_list[idx];
+                auto iter = std::remove_if(v_list.begin(), v_list.end(), [&vertex](const adjacent_vertex& v1) {
                     return v1.vertex == vertex;
-                }));
-                --num_edges;
+                });
+                if (iter == v_list.end()) {
+                    continue;
+                } else {
+                    v_list.erase(iter);
+                    --num_edges;
+                }
             }
         }
 
+        // finally, remove the vertex itself.
         auto iter = adj_list.begin();
         std::advance(iter, index);
         adj_list.erase(iter);
+
+        // erase it from the vertex map as well
+        vertex_map.erase(vertex);
     }
 
     /**
