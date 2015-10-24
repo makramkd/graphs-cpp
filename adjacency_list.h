@@ -21,11 +21,20 @@
 template<typename vertex_type = int, typename weight_type = int>
 class adjacency_list {
 public:
+
+    // we need to hold the vertex id
+    // and the weight of the edge to that vertex
+    struct adjacent_vertex {
+        vertex_type vertex;
+        weight_type weight;
+    };
+
     /**
-     * The type that will be held inside the adjacency list:
-     * it is actually a list of lists.
+     * The type that will be held inside the adjacency list. It is
+     * list of adjacent_vertex objects that each vertex in the
+     * graph will have.
      */
-    typedef std::vector<vertex_type> vertex_list;
+    typedef std::vector<adjacent_vertex> vertex_list;
     typedef unsigned long size_type;
 
     /**
@@ -106,8 +115,8 @@ public:
         auto index_v2 = vertex_map[edge.v2];
 
         // add the vertices to their respective adjacency lists
-        adj_list[index_v1].push_back(edge.v2);
-        adj_list[index_v2].push_back(edge.v1);
+        adj_list[index_v1].push_back({edge.v2, edge.weight});
+        adj_list[index_v2].push_back({edge.v1, edge.weight});
     }
 
     /**
@@ -120,6 +129,15 @@ public:
         e.v1 = v1;
         e.v2 = v2;
         e.weight = w;
+        add_edge(e);
+    }
+
+    void add_edge(vertex_type v1, vertex_type v2)
+    {
+        edge<vertex_type, weight_type> e;
+        e.v1 = v1;
+        e.v2 = v2;
+        e.weight = 0;
         add_edge(e);
     }
 
