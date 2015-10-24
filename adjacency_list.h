@@ -41,7 +41,10 @@ public:
      * Construct an empty adjacency list.
      */
     adjacency_list()
-    :adj_list()
+    :adj_list(),
+     next_vertex(0),
+     vertex_map(),
+     num_edges(0)
     {
 
     }
@@ -53,7 +56,8 @@ public:
     adjacency_list(size_type vertex_count)
     :adj_list(vertex_count),
      next_vertex(vertex_count),
-     vertex_map()
+     vertex_map(),
+     num_edges(0)
     {
         // fill up the map
         for (unsigned long i = 0; i < vertex_count; ++i) {
@@ -68,7 +72,8 @@ public:
     adjacency_list(const adjacency_list& other)
     :adj_list(other.adj_list),
      next_vertex(other.next_vertex),
-     vertex_map(other.vertex_map)
+     vertex_map(other.vertex_map),
+     num_edges(other.num_edges)
     {
 
     }
