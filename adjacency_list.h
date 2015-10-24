@@ -208,7 +208,8 @@ public:
      */
     const vertex_list& operator[](vertex_type vertex) const
     {
-        return adj_list[vertex_map[vertex]];
+        auto index = vertex_map.at(vertex);
+        return adj_list[index];
     }
 
     /**
@@ -217,8 +218,8 @@ public:
     double average_degree() const
     {
         auto sum = std::accumulate(adj_list.begin(), adj_list.end(), 0.0,
-                    [](const vertex_list& left, const vertex_list& right) {
-                        return left.size() + right.size();
+                    [](double init, const vertex_list& right) {
+                        return init + static_cast<double>(right.size());
                     });
         return sum / adj_list.size();
     }
@@ -232,7 +233,7 @@ public:
                     [](const vertex_list& left, const vertex_list& right) {
                         return left.size() < right.size();
                     });
-        return max == adj_list.end() ? -1 : *max;
+        return max == adj_list.end() ? 0 : max->size();
     }
 
     /**
@@ -244,7 +245,7 @@ public:
                     [](const vertex_list& left, const vertex_list& right) {
                         return left.size() < right.size();
                     });
-        return min == adj_list.end() ? -1 : *min;
+        return min == adj_list.end() ? 0 : min->size();
     }
 
     size_type edge_count() const
