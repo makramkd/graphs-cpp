@@ -93,7 +93,32 @@ public:
      */
     void remove_vertex(vertex_type vertex)
     {
+        if (vertex_map.find(vertex) == vertex_map.end()) {
+            return; // vertex not in graph
+        }
 
+        // we need to erase the entry of this vertex
+        // in the adjacency list, as well as all occurences
+        // of this vertex in the adjacency list of other vertices
+        auto index = vertex_map[vertex];
+
+        // remove all occurrences of this vertex in
+        // the adjacency list except for that particular
+        // index
+        auto begin = vertex_map[adj_list.begin()];
+        auto end = vertex_map[adj_list.end() - 1];
+        for (auto idx = begin; idx != end; ++idx) {
+            if (begin == index) {
+                continue; // don't do anything to this index: will remove later
+            } else {
+                auto v_list = adj_list[idx];
+                v_list.erase(std::remove(v_list.begin(), v_list.end(), vertex));
+            }
+        }
+
+        auto iter = adj_list.begin();
+        std::advance(iter, index);
+        adj_list.erase(iter);
     }
 
     /**
