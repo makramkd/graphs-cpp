@@ -7,6 +7,7 @@
 
 #include <vector>
 #include <map>
+#include <numeric>
 #include "edge.h"
 
 /**
@@ -144,9 +145,30 @@ public:
      * If the vertex is not in the adjacency list an exception
      * may be thrown.
      */
-    const vertex_list& operator[](vertex_type vertex)
+    const vertex_list& operator[](vertex_type vertex) const
     {
         return adj_list[vertex_map[vertex]];
+    }
+
+    /**
+     * Returns the average degree of vertices in this graph.
+     */
+    double average_degree() const
+    {
+        auto sum = std::accumulate(adj_list.begin(), adj_list.end(), 0.0,
+                    [](const vertex_list& left, const vertex_list& right) {
+                        return left.size() + right.size();
+                    });
+        return sum / adj_list.size();
+    }
+
+    size_type max_degree() const
+    {
+        auto max = std::max_element(adj_list.begin(), adj_list.end(),
+                    [](const vertex_list& left, const vertex_list& right) {
+                        return left.size() < right.size();
+                    });
+        return max == adj_list.end() ? -1 : *max;
     }
 private:
     // the adjacency list itself.

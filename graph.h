@@ -5,6 +5,7 @@
 #ifndef GRAPHS_GRAPH_H
 #define GRAPHS_GRAPH_H
 
+#include <numeric>
 #include "adjacency_list.h"
 
 /**
@@ -15,6 +16,8 @@ template<typename vertex_type = int, typename weight_type = int>
 class graph {
 public:
     typedef typename adjacency_list<vertex_type, weight_type>::vertex_list vertex_list;
+    typedef typename adjacency_list<vertex_type, weight_type>::size_type size_type;
+
     graph()
     : adj_list()
     {
@@ -33,11 +36,30 @@ public:
 
     }
 
-    vertex_list adjList(vertex_type vertex)
+    vertex_list adj_list_of(vertex_type vertex)
     {
         return adj_list[vertex];
     }
 
+    size_type degree_of(vertex_type vertex)
+    {
+        return adj_list[vertex].size();
+    }
+
+    double avg_degree()
+    {
+        return adj_list.average_degree();
+    }
+
+    size_type max_degree()
+    {
+        return adj_list.max_degree();
+    }
+
+    size_type min_degree()
+    {
+        return adj_list.min_degree();
+    }
 private:
     adjacency_list<vertex_type, weight_type> adj_list;
 };
