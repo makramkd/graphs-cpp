@@ -114,11 +114,12 @@ public:
      * Add an edge that connects vertices v1 and v2. If such an
      * edge already exists, do nothing.
      */
-    void add_edge(vertex_type v1, vertex_type v2)
+    void add_edge(vertex_type v1, vertex_type v2, weight_type w)
     {
         edge<vertex_type, weight_type> e;
         e.v1 = v1;
         e.v2 = v2;
+        e.weight = w;
         add_edge(e);
     }
 
@@ -162,6 +163,9 @@ public:
         return sum / adj_list.size();
     }
 
+    /**
+     * Returns the maximum degree of all vertices in this graph.
+     */
     size_type max_degree() const
     {
         auto max = std::max_element(adj_list.begin(), adj_list.end(),
@@ -169,6 +173,18 @@ public:
                         return left.size() < right.size();
                     });
         return max == adj_list.end() ? -1 : *max;
+    }
+
+    /**
+     * Returns the minimum degree of all vertices in this graph.
+     */
+    size_type min_degree() const
+    {
+        auto min = std::min_element(adj_list.begin(), adj_list.end(),
+                    [](const vertex_list& left, const vertex_list& right) {
+                        return left.size() < right.size();
+                    });
+        return min == adj_list.end() ? -1 : *min;
     }
 private:
     // the adjacency list itself.

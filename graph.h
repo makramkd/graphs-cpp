@@ -36,27 +36,27 @@ public:
 
     }
 
-    vertex_list adj_list_of(vertex_type vertex)
+    const vertex_list& adj_list_of(vertex_type vertex) const
     {
         return adj_list[vertex];
     }
 
-    size_type degree_of(vertex_type vertex)
+    size_type degree_of(vertex_type vertex) const
     {
         return adj_list[vertex].size();
     }
 
-    double avg_degree()
+    double avg_degree() const
     {
         return adj_list.average_degree();
     }
 
-    size_type max_degree()
+    size_type max_degree() const
     {
         return adj_list.max_degree();
     }
 
-    size_type min_degree()
+    size_type min_degree() const
     {
         return adj_list.min_degree();
     }
