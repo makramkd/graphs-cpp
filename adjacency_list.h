@@ -11,6 +11,11 @@
 #include "edge.h"
 
 /**
+ * Adapting the adjacency_list class so that we can use sfinae.
+ */
+template<typename, typename, typename = void, typename = void> class adjacency_list;
+
+/**
  * A class that represents an adjacency list. An adjacency list
  * is one possible way to store the information about a graph.
  *
@@ -18,8 +23,10 @@
  * in the list is a list of the vertices that are adjacent to that
  * respective vertex.
  */
-template<typename vertex_type = int, typename weight_type = int>
-class adjacency_list {
+template<typename vertex_type, typename weight_type>
+class adjacency_list<vertex_type, weight_type, typename std::enable_if<std::is_integral<vertex_type>::value>::type,
+                    typename std::enable_if<std::is_integral<weight_type>::value>::type>
+{
 public:
 
     // we need to hold the vertex id
@@ -113,14 +120,17 @@ public:
         // remove all occurrences of this vertex in
         // the adjacency list except for that particular
         // index
-        auto begin = vertex_map[adj_list.begin()];
-        auto end = vertex_map[adj_list.end() - 1];
+        auto begin = vertex_map[0];
+        auto end = vertex_map[adj_list.size() - 1];
         for (auto idx = begin; idx != end; ++idx) {
-            if (begin == index) {
+            if (idx == index) {
                 continue; // don't do anything to this index: will remove later
             } else {
                 auto v_list = adj_list[idx];
-                v_list.erase(std::remove(v_list.begin(), v_list.end(), vertex));
+                v_list.erase(std::remove_if(v_list.begin(), v_list.end(), [&vertex](const adjacent_vertex& v1) {
+                    return v1.vertex == vertex;
+                }));
+                --num_edges;
             }
         }
 

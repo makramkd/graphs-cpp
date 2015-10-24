@@ -8,11 +8,18 @@
 #include "adjacency_list.h"
 
 /**
+ * Leveraging sfinae again.
+ */
+template<typename, typename, typename = void, typename = void> class graph;
+
+/**
  * A class that represents an undirected graph. There may
  * be weights on some of the edges.
  */
-template<typename vertex_type = int, typename weight_type = int>
-class graph {
+template<typename vertex_type, typename weight_type>
+class graph<vertex_type, weight_type, typename std::enable_if<std::is_integral<vertex_type>::value>::type,
+            typename std::enable_if<std::is_integral<weight_type>::value>::type>
+{
 public:
     typedef typename adjacency_list<vertex_type, weight_type>::vertex_list vertex_list;
     typedef typename adjacency_list<vertex_type, weight_type>::size_type size_type;
