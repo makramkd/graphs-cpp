@@ -5,7 +5,6 @@
 #ifndef GRAPHS_GRAPH_H
 #define GRAPHS_GRAPH_H
 
-#include <numeric>
 #include "adjacency_list.h"
 
 /**
@@ -59,6 +58,36 @@ public:
     size_type min_degree() const
     {
         return adj_list.min_degree();
+    }
+
+    void add_vertex(vertex_type vertex)
+    {
+        adj_list.add_vertex(vertex);
+    }
+
+    void add_edge(vertex_type v1, vertex_type v2, weight_type w = 0)
+    {
+        adj_list.add_edge(v1, v2, w);
+    }
+
+    void remove_vertex(vertex_type vertex)
+    {
+        adj_list.remove_vertex(vertex);
+    }
+
+    void remove_edge(vertex_type v1, vertex_type v2)
+    {
+        adj_list.remove_edge(v1, v2);
+    }
+
+    size_type edges() const
+    {
+        return adj_list.edge_count();
+    }
+
+    size_type vertices() const
+    {
+        return adj_list.vertex_count();
     }
 private:
     adjacency_list<vertex_type, weight_type> adj_list;
