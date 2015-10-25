@@ -10,6 +10,8 @@
       <sourceFolder url="file://$MODULE_DIR$/graph.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/graph.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/main.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/matrix.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/matrix.h" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
