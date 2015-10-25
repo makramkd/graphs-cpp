@@ -294,6 +294,24 @@ public:
     {
         return adj_list.size();
     }
+
+    /**
+     * Returns true if and only if vertex v1 is adjacent to vertex v2
+     * (and vice versa, since this is an undirected graph)
+     */
+    bool adjacent_to(vertex_type v1, vertex_type v2) const
+    {
+        if (vertex_map.find(v1) == vertex_map.end() || vertex_map.find(v2) == vertex_map.end()) {
+            return false;
+        } else {
+            auto index = vertex_map[v1];
+            auto v_list = adj_list[index];
+            auto find = std::find_if(v_list.begin(), v_list.end(), [&v2](const adjacent_vertex& vertex) {
+                return vertex.vertex == v2;
+            });
+            return find == v_list.end();
+        }
+    }
 private:
     // the adjacency list itself.
     std::vector<vertex_list> adj_list;

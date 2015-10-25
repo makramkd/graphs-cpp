@@ -36,7 +36,7 @@ public:
     /**
      * Construct a graph with num_vertices in it.
      */
-    graph(int num_vertices)
+    graph(size_type num_vertices)
     : adj_list(num_vertices)
     {
 
@@ -140,6 +140,11 @@ public:
     size_type vertices() const
     {
         return adj_list.vertex_count();
+    }
+
+    bool adjacent(vertex_type v1, vertex_type v2) const
+    {
+        return adj_list.adjacent_to(v1, v2);
     }
 private:
     adjacency_list<vertex_type, weight_type> adj_list;
