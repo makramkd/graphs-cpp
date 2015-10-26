@@ -42,7 +42,6 @@ public:
         return vec[i * columns + j];
     }
 
-
 private:
     std::vector<T> vec;
     unsigned int rows;

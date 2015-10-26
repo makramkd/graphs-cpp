@@ -55,7 +55,6 @@ int main() {
     std::cout << "Number of edges in g: " << g.edges() << std::endl;
 
     matrix<int, 3, 3> m(0);
-    matrix<std::string, 3, 3> m2;
 
     for (unsigned int i = 0; i < 3; ++i) {
         for (unsigned int j = 0; j < 3; ++j) {
