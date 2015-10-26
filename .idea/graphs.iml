@@ -5,10 +5,16 @@
       <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/adjacency_list.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/adjacency_list.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/adjacency_matrix.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/adjacency_matrix.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/edge.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/edge.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/graph.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/graph.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/incidence_matrix.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/incidence_matrix.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/laplacian_matrix.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/laplacian_matrix.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/main.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/matrix.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/matrix.h" isTestSource="false" />
